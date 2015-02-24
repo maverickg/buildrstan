@@ -2,11 +2,12 @@
 
 dd if=/dev/zero of=.swapfile bs=2048 count=1M
 mkswap .swapfile
-11sudo swapon .swapfile
+sudo swapon .swapfile
 
 cd rstan
 git submodule update --init --remote --recursive
-sudo apt-get install r-base-core \
+sudo apt-get -qq update
+sudo apt-get -qq -y install r-base-core \
   devscripts gfortran-multilib gfortran-doc gfortran-4.8-multilib \
   gfortran-4.8-doc libgfortran3-dbg libdigest-hmac-perl libgssapi-perl \
   libdata-dump-perl libcrypt-ssleay-perl ncurses-doc libauthen-ntlm-perl \
