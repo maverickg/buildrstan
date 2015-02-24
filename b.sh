@@ -9,15 +9,16 @@ sudo apt-get install r-base-core \
   texlive-base texlive-latex-base texlive-generic-recommended \
   texlive-fonts-recommended texlive-fonts-extra texlive-extra-utils \
   texlive-latex-recommended texlive-latex-extra texinfo texi2html \
-  build-essentiala \
+  build-essential \
   tcl-tclreadline \
+
 R CMD build StanHeaders/
 
 stanheadtargz=`find StanHeaders*.tar.gz`
 
 lookforverfile=`tar tf ${stanheadtargz} | grep stan/version.hpp`
 
-if [ -n "$lookforverfile" ]; then
+if [ -z "$lookforverfile" ]; then
     echo "stan/version.hpp is not found in StanHeaders pkg"
     exit 2
 fi
