@@ -10,13 +10,12 @@ export  R_LIBS="~/rlib"
 cd rstan
 git submodule update -q --init --remote --recursive
 sudo apt-get -qq update
-sudo apt-get -qq -y install r-base-core \
-  texlive-latex-base texlive-base  xzdec texinfo \
-# texlive-base texlive-latex-base texlive-generic-recommended \
-# texlive-fonts-recommended texlive-fonts-extra texlive-extra-utils \
-# texlive-latex-recommended texlive-latex-extra texinfo \
-# build-essential \
-  ccache
+sudo apt-get -qq -y install r-base-core qpdf texlive-latex-base texlive-base  xzdec texinfo ccache
+
+mkdir -p ~/.R/
+echo "CXX = ccache `R CMD config CXX`" > ~/.R/Makevars
+more ~/.R/Makevars
+echo "_R_CHECK_FORCE_SUGGESTS_=FALSE" > ~/.R/check.Renviron
 
 sudo tlmgr init-usertree
 sudo tlmgr update --self 
@@ -41,15 +40,12 @@ R CMD INSTALL ${stanheadtargz}
 
 R -q -e "options(repos=structure(c(CRAN = 'http://cran.rstudio.com'))); for (pkg in c('inline', 'Rcpp', 'RcppEigen', 'RUnit', 'BH', 'RInside')) if (!require(pkg, character.only = TRUE))  install.packages(pkg, dep = TRUE); sessionInfo()"
 
-mkdir -p ~/.R/
-echo "CXX = ccache `R CMD config CXX`" > ~/.R/Makevars
-more ~/.R/Makevars
-echo "_R_CHECK_FORCE_SUGGESTS_=FALSE" > ~/.R/check.Renviron
 
-echo "CXX = ccache `R CMD config CXX`" >> ./rstan/rstan/R_Makevars
-more ./rstan/rstan/R_Makevars
 
 cd rstan
+echo "CXX = ccache `R CMD config CXX`" >> R_Makevars
+more R_Makevars
+make build
 make check & ~/buildrstan/wait4.sh $!
 
 cd tests
