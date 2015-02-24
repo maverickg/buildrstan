@@ -1,6 +1,6 @@
 #!/bin/bash 
 
-dd if=/dev/zero of=.swapfile bs=1024 count=1M
+dd if=/dev/zero of=.swapfile bs=2048 count=1M
 mkswap .swapfile
 sudo swapon .swapfile
 
