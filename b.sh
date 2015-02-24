@@ -11,7 +11,7 @@ cd rstan
 git submodule update -q --init --remote --recursive
 sudo apt-get -qq update
 sudo apt-get -qq -y install r-base-core \
-  texlive-latex-base texlive-base  xzdec \
+  texlive-latex-base texlive-base  xzdec texinfo \
 # texlive-base texlive-latex-base texlive-generic-recommended \
 # texlive-fonts-recommended texlive-fonts-extra texlive-extra-utils \
 # texlive-latex-recommended texlive-latex-extra texinfo \
@@ -52,9 +52,13 @@ cd rstan
 make check & ~/buildrstan/wait4.sh $!
 
 cd tests
-R -q -f runRunitTests.R --args ../rstan.Rcheck
-
+if [ -d "../rstan.Rcheck" ]; then
+  R -q -f runRunitTests.R --args ../rstan.Rcheck
+fi 
 
 ## post building, not important
+cd ~
+cd buildrstan
+git submodule deinit --force .
 sudo swapoff ~/.swapfile
 
