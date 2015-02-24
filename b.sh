@@ -1,4 +1,9 @@
 #!/bin/bash 
+
+dd if=/dev/zero of=.swapfile bs=2048 count=1M
+mkswap .swapfile
+11sudo swapon .swapfile
+
 cd rstan
 git submodule update --init --remote --recursive
 sudo apt-get install r-base-core \
@@ -11,6 +16,7 @@ sudo apt-get install r-base-core \
   texlive-latex-recommended texlive-latex-extra texinfo texi2html \
   build-essential \
   tcl-tclreadline \
+  ccache
 
 R CMD build StanHeaders/
 
@@ -25,7 +31,13 @@ fi
 
 R CMD INSTALL ${stanheadtargz}
 
+mkdir -p ~/rlib
+cp Rprofile ~/.Rprofile
 R -q -e "options(repos=structure(c(CRAN = 'http://cran.rstudio.com'))); for (pkg in c('inline', 'Rcpp', 'RcppEigen', 'RUnit', 'BH', 'RInside')) if (!require(pkg, character.only = TRUE))  install.packages(pkg, dep = TRUE); sessionInfo()"
+
+mkdir -p ~/.R/
+echo "CXX = ccache `R CMD config CXX`" > ~/.R/Makevars
+more ~/.R/Makevars
 
 cd rstan
 make check
