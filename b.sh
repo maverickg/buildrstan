@@ -56,9 +56,3 @@ if [ -d "../rstan.Rcheck" ]; then
   R -q -f runRunitTests.R --args ../rstan.Rcheck
 fi 
 
-## post building, not important
-cd ~
-cd buildrstan
-git submodule deinit --force .
-sudo swapoff ~/.swapfile
-
