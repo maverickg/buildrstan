@@ -1,6 +1,6 @@
 #!/bin/bash 
 
-dd if=/dev/zero of=.swapfile bs=2048 count=1M
+dd if=/dev/zero of=.swapfile bs=1024 count=1M
 mkswap .swapfile
 sudo swapon .swapfile
 
@@ -9,14 +9,10 @@ git submodule update --init --remote --recursive
 sudo apt-get -qq update
 sudo apt-get -qq -y install r-base-core \
   devscripts gfortran-multilib gfortran-doc gfortran-4.8-multilib \
-  gfortran-4.8-doc libgfortran3-dbg libdigest-hmac-perl libgssapi-perl \
-  libdata-dump-perl libcrypt-ssleay-perl ncurses-doc libauthen-ntlm-perl \
-  python-rsvg python-cairo ess r-doc-info r-doc-pdf r-mathlib r-base-html \
   texlive-base texlive-latex-base texlive-generic-recommended \
   texlive-fonts-recommended texlive-fonts-extra texlive-extra-utils \
-  texlive-latex-recommended texlive-latex-extra texinfo texi2html \
+  texlive-latex-recommended texlive-latex-extra texinfo \
   build-essential \
-  tcl-tclreadline \
   ccache
 
 R CMD build StanHeaders/
