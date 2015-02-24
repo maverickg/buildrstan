@@ -44,6 +44,7 @@ R -q -e "options(repos=structure(c(CRAN = 'http://cran.rstudio.com'))); for (pkg
 mkdir -p ~/.R/
 echo "CXX = ccache `R CMD config CXX`" > ~/.R/Makevars
 more ~/.R/Makevars
+echo "_R_CHECK_FORCE_SUGGESTS_=FALSE" > ~/.R/check.Renviron
 
 echo "CXX = ccache `R CMD config CXX`" >> ./rstan/rstan/R_Makevars
 more ./rstan/rstan/R_Makevars
