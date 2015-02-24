@@ -43,9 +43,9 @@ R -q -e "options(repos=structure(c(CRAN = 'http://cran.rstudio.com'))); for (pkg
 
 
 cd rstan
-echo "CXX = ccache `R CMD config CXX`" >> R_Makevars
+echo "CXX = `R CMD config CXX`" >> R_Makevars # ccache is set in ~/.R/Makevars
 more R_Makevars
-make build
+make build & ~/buildrstan/wait4.sh $!
 make check & ~/buildrstan/wait4.sh $!
 
 cd tests
