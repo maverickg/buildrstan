@@ -49,7 +49,7 @@ echo "CXX = ccache `R CMD config CXX`" >> ./rstan/rstan/R_Makevars
 more ./rstan/rstan/R_Makevars
 
 cd rstan
-make check & ../../wait4.sh $!
+make check & ~/buildrstan/wait4.sh $!
 
 cd tests
 R -q -f runRunitTests.R --args ../rstan.Rcheck
