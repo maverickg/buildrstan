@@ -8,7 +8,6 @@ cd rstan
 git submodule update --init --remote --recursive
 sudo apt-get -qq update
 sudo apt-get -qq -y install r-base-core \
-  devscripts gfortran-multilib gfortran-doc gfortran-4.8-multilib \
   texlive-base texlive-latex-base texlive-generic-recommended \
   texlive-fonts-recommended texlive-fonts-extra texlive-extra-utils \
   texlive-latex-recommended texlive-latex-extra texinfo \
@@ -29,7 +28,7 @@ fi
 R CMD INSTALL ${stanheadtargz}
 
 mkdir -p ~/rlib
-cp Rprofile ~/.Rprofile
+export  R_LIBS="~/rlib"
 R -q -e "options(repos=structure(c(CRAN = 'http://cran.rstudio.com'))); for (pkg in c('inline', 'Rcpp', 'RcppEigen', 'RUnit', 'BH', 'RInside')) if (!require(pkg, character.only = TRUE))  install.packages(pkg, dep = TRUE); sessionInfo()"
 
 mkdir -p ~/.R/
