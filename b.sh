@@ -16,10 +16,12 @@ export  R_LIBS="~/rlib"
 
 git config -f .gitmodules submodule.rstan.branch develop
 git submodule update --init --remote
+git submodule status
 
 cd rstan
 git config -f .gitmodules submodule.stan.branch ${STAN_REMO_BRANCH}
 git submodule update --init --remote --recursive
+git submodule status
 sudo apt-get -qq update
 sudo apt-get -qq -y install r-base-core qpdf texlive-latex-base texlive-base  xzdec texinfo ccache
 
@@ -56,9 +58,4 @@ cd rstan
 echo "CXX = `R CMD config CXX`" >> R_Makevars # ccache is set in ~/.R/Makevars
 more R_Makevars
 make check & ~/buildrstan/wait4.sh $!
-
-cd tests
-if [ -d "../rstan.Rcheck" ]; then
-  R -q -f runRunitTests.R --args ../rstan.Rcheck
-fi 
 
