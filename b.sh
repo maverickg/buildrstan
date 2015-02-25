@@ -2,6 +2,9 @@
 
 echo "Usage: $0 [stan repo branch name, default to master]"
 
+mkdir -p ~/rlib
+export  R_LIBS="~/rlib"
+
 STAN_REMO_BRANCH=master
 if [ $# -gt 0 ]; then
 STAN_REMO_BRANCH=develop
@@ -11,8 +14,6 @@ dd if=/dev/zero of=~/.swapfile bs=2048 count=1M
 mkswap ~/.swapfile
 sudo swapon ~/.swapfile
 
-mkdir -p ~/rlib
-export  R_LIBS="~/rlib"
 
 git config -f .gitmodules submodule.rstan.branch develop
 git submodule update --init --remote
@@ -57,5 +58,5 @@ R -q -e "options(repos=structure(c(CRAN = 'http://cran.rstudio.com'))); for (pkg
 cd rstan
 echo "CXX = `R CMD config CXX`" >> R_Makevars # ccache is set in ~/.R/Makevars
 more R_Makevars
-make check & ~/buildrstan/wait4.sh $!
+make check # & ~/buildrstan/wait4.sh $!
 

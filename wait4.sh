@@ -11,3 +11,4 @@ do
     sleep 20
   fi
 done
+exit $!
