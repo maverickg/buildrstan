@@ -4,4 +4,5 @@
 cd ~/buildrstan
 git submodule deinit --force .
 sudo swapoff ~/.swapfile
+exit 0
 

@@ -1,14 +1,17 @@
 #!/bin/sh
-PROCESS="$1"
+cmd="$1"
+${cmd} &
+PROCESS=$!
 while :
 do
   RESULT=`ps -p ${PROCESS} -o comm=`
  
   if [ "${RESULT:-null}" = null ]; then
-    break
+    wait ${PROCESS}
+    exit $?
   else
     echo "-"
     sleep 20
   fi
 done
-exit $!
+exit $?
