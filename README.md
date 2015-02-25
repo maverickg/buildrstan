@@ -2,3 +2,11 @@
 
 # buildrstan
 script for building rstan on semaphore
+
+# build command in [semaphoreapp](https://semaphoreapp.com/maverickg/buildrstan/settings)
+
+1. `bash -x b.sh` for Thread #1
+2. `bash -x b.sh develop` for Thread #2
+4. `bash -x t.sh` for Thread #1 and #2
+3. `bash -x p.sh` for Post-thread
+
