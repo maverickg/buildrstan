@@ -6,6 +6,11 @@ export  R_LIBS="~/rlib"
 STAN_REPO_BRANCH=`git rev-parse --abbrev-ref HEAD`
 RSTAN_REPO_BRANCH=develop
 
+grepstanbranch=`git ls-remote --heads https://github.com/stan-dev/stan.git | grep ${STAN_REPO_BRANCH}`
+if [ -z "$grepstanbranch" ]; then
+    STAN_REPO_BRANCH=master
+fi
+
 dd if=/dev/zero of=~/.swapfile bs=2048 count=1M
 mkswap ~/.swapfile
 sudo swapon ~/.swapfile
