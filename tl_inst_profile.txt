@@ -9,7 +9,7 @@ TEXMFSYSVAR /home/runner/buildrstan/.semaphore-cache/texlive/2014/texmf-var
 TEXMFVAR /home/runner/buildrstan/.semaphore-cache/.texlive2014/texmf-var
 binary_x86_64-linux 1
 collection-basic 1
-collection-bibtexextra 1
+collection-bibtexextra 0
 collection-binextra 1
 collection-latex 1
 collection-mathextra 1
@@ -18,12 +18,12 @@ in_place 0
 option_adjustrepo 1
 option_autobackup 1
 option_backupdir tlpkg/backups
-option_desktop_integration 1
-option_doc 1
-option_file_assocs 1
+option_desktop_integration 0
+option_doc 0
+option_file_assocs 0
 option_fmt 1
 option_letter 0
-option_menu_integration 1
+option_menu_integration 0
 option_path 0
 option_post_code 1
 option_src 1

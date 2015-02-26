@@ -3,11 +3,11 @@
 mkdir -p ~/rlib
 export  R_LIBS="~/rlib"
 
-ls $SEMAPHORE_CACHE_DIR
+ls -a $SEMAPHORE_CACHE_DIR
 if [ ! -d "$SEMAPHORE_CACHE_DIR/texlive" ]; then
   bash -x tl_inst.sh
-  export PATH=$SEMAPHORE_CACHE_DIR/texlive/2014/bin/x86_64-linux:$PATH
 fi
+export PATH=$SEMAPHORE_CACHE_DIR/texlive/2014/bin/x86_64-linux:$PATH
 
 STAN_REPO_BRANCH=`git rev-parse --abbrev-ref HEAD`
 RSTAN_REPO_BRANCH=develop
