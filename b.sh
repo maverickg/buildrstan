@@ -6,6 +6,16 @@ export  R_LIBS="~/rlib"
 STAN_REPO_BRANCH=`git rev-parse --abbrev-ref HEAD`
 RSTAN_REPO_BRANCH=develop
 
+grepstanbranch=`git ls-remote --heads https://github.com/stan-dev/stan.git | grep "/${STAN_REPO_BRANCH}"`
+if [ -z "$grepstanbranch" ]; then
+    STAN_REPO_BRANCH=master
+fi
+
+greprstanbranch=`git ls-remote --heads https://github.com/stan-dev/rstan.git | grep "/${RSTAN_REPO_BRANCH}"`
+if [ -z "$greprstanbranch" ]; then
+    RSTAN_REPO_BRANCH=develop
+fi
+
 dd if=/dev/zero of=~/.swapfile bs=2048 count=1M
 mkswap ~/.swapfile
 sudo swapon ~/.swapfile
@@ -21,6 +31,10 @@ git submodule update --init --remote --recursive
 git submodule status
 sudo apt-get -qq update
 sudo apt-get -qq -y install r-base-core qpdf texlive-latex-base texlive-base  xzdec texinfo ccache
+
+mkdir -p "${SEMAPHORE_CACHE_DIR}/.ccahe"
+export CCACHE_DIR="${SEMAPHORE_CACHE_DIR}/.ccahe"
+ls $CCACHE_DIR
 
 mkdir -p ~/.R/
 echo "CXX = ccache `R CMD config CXX`" > ~/.R/Makevars
