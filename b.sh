@@ -3,6 +3,12 @@
 mkdir -p ~/rlib
 export  R_LIBS="~/rlib"
 
+ls $SEMAPHORE_CACHE_DIR
+if [ ! -d "$SEMAPHORE_CACHE_DIR/texlive" ]; then
+  bash -x tl_inst.sh
+  export PATH=$SEMAPHORE_CACHE_DIR/texlive/2014/bin/x86_64-linux:$PATH
+fi
+
 STAN_REPO_BRANCH=`git rev-parse --abbrev-ref HEAD`
 RSTAN_REPO_BRANCH=develop
 
@@ -30,7 +36,7 @@ git config -f .gitmodules submodule.stan.branch ${STAN_REPO_BRANCH}
 git submodule update --init --remote --recursive
 git submodule status
 sudo apt-get -qq update
-sudo apt-get -qq -y install r-base-core qpdf texlive-latex-base texlive-base  xzdec texinfo ccache
+sudo apt-get -qq -y install r-base-core qpdf xzdec texinfo ccache
 
 mkdir -p "${SEMAPHORE_CACHE_DIR}/.ccahe"
 export CCACHE_DIR="${SEMAPHORE_CACHE_DIR}/.ccahe"
@@ -39,14 +45,6 @@ mkdir -p ~/.R/
 echo "CXX = ccache `R CMD config CXX`" > ~/.R/Makevars
 more ~/.R/Makevars
 echo "_R_CHECK_FORCE_SUGGESTS_=FALSE" > ~/.R/check.Renviron
-
-sudo tlmgr init-usertree
-sudo tlmgr update --self 
-sudo tlmgr install inconsolata upquote courier courier-scaled helvetic \
-                   verbatimbox readarray ifnextok multirow fancyvrb url \
-                   titlesec booktabs tex4ht
-# font 
-sudo tlmgr install ec times
 
 R CMD build StanHeaders/
 
