@@ -1,4 +1,3 @@
 [submodule "rstan"]
 	path = rstan
 	url = https://github.com/stan-dev/rstan.git
-	branch = develop

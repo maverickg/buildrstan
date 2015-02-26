@@ -20,17 +20,21 @@ dd if=/dev/zero of=~/.swapfile bs=2048 count=1M
 mkswap ~/.swapfile
 sudo swapon ~/.swapfile
 
+git submodule update --init --recursive
 
 git config -f .gitmodules submodule.rstan.branch ${RSTAN_REPO_BRANCH}
-git submodule update --init --remote
+git submodule update --remote
 git submodule status
 
 cd rstan
 git config -f .gitmodules submodule.stan.branch ${STAN_REPO_BRANCH}
-git submodule update --init --remote --recursive
+git submodule update --remote --recursive
 git submodule status
 sudo apt-get -qq update
 sudo apt-get -qq -y install r-base-core qpdf texlive-latex-base texlive-base  xzdec texinfo ccache
+
+mkdir -p "${SEMAPHORE_CACHE_DIR}/.ccahe"
+export CCACHE_DIR="${SEMAPHORE_CACHE_DIR}/.ccahe"
 
 mkdir -p ~/.R/
 echo "CXX = ccache `R CMD config CXX`" > ~/.R/Makevars
