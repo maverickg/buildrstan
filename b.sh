@@ -32,6 +32,9 @@ git submodule status
 sudo apt-get -qq update
 sudo apt-get -qq -y install r-base-core qpdf texlive-latex-base texlive-base  xzdec texinfo ccache
 
+mkdir -p "${SEMAPHORE_CACHE_DIR}/.ccahe"
+export CCACHE_DIR="${SEMAPHORE_CACHE_DIR}/.ccahe"
+
 mkdir -p ~/.R/
 echo "CXX = ccache `R CMD config CXX`" > ~/.R/Makevars
 more ~/.R/Makevars
