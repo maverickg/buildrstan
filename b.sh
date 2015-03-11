@@ -20,15 +20,15 @@ dd if=/dev/zero of=~/.swapfile bs=2048 count=1M
 mkswap ~/.swapfile
 sudo swapon ~/.swapfile
 
-git submodule update --init --recursive
+git submodule --quiet update --init --recursive
 
 git config -f .gitmodules submodule.rstan.branch ${RSTAN_REPO_BRANCH}
-git submodule update --remote
+git submodule --quiet update --remote
 git submodule status
 
 cd rstan
 git config -f .gitmodules submodule.stan.branch ${STAN_REPO_BRANCH}
-git submodule update --remote
+git submodule --quiet update --remote
 git submodule status
 
 mkdir -p "${SEMAPHORE_CACHE_DIR}/.ccahe"
