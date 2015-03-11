@@ -40,7 +40,7 @@ sudo add-apt-repository -y "ppa:marutter/rrutter"
 sudo add-apt-repository -y "ppa:marutter/c2d4u"
 
 sudo apt-get -qq update
-sudo apt-get -qq -y install r-base-core qpdf texlive-latex-base texlive-base  xzdec texinfo ccache tex4ht texlive-fonts-extra
+sudo apt-get -qq -y install r-base-core qpdf texlive-latex-base texlive-base  xzdec texinfo ccache tex4ht texlive-fonts-extra r-cran-rcurl
 sudo tlmgr init-usertree
 sudo tlmgr update --self 
 sudo tlmgr install upquote courier courier-scaled helvetic \
@@ -69,7 +69,7 @@ fi
 R CMD INSTALL ${stanheadtargz}
 
 
-R -q -e "options(repos=structure(c(CRAN = 'http://cran.rstudio.com'))); for (pkg in c('inline', 'Rcpp', 'RcppEigen', 'RUnit', 'BH', 'RInside', 'RCurl', 'coda')) if (!require(pkg, character.only = TRUE))  install.packages(pkg, dep = TRUE); sessionInfo()"
+R -q -e "options(repos=structure(c(CRAN = 'http://cran.rstudio.com'))); for (pkg in c('inline', 'Rcpp', 'RcppEigen', 'RUnit', 'BH', 'RInside', 'coda')) if (!require(pkg, character.only = TRUE))  install.packages(pkg, dep = TRUE); sessionInfo()"
 
 cd rstan
 echo "CXX = `R CMD config CXX`" >> R_Makevars # ccache is set in ~/.R/Makevars
