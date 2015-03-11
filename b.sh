@@ -34,6 +34,11 @@ git submodule status
 mkdir -p "${SEMAPHORE_CACHE_DIR}/.ccahe"
 export CCACHE_DIR="${SEMAPHORE_CACHE_DIR}/.ccahe"
 
+sudo add-apt-repository "deb http://cran.rstudio.com/bin/linux/ubuntu $(lsb_release -cs)/"
+sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E084DAB9
+sudo add-apt-repository -y "ppa:marutter/rrutter"
+sudo add-apt-repository -y "ppa:marutter/c2d4u"
+
 sudo apt-get -qq update
 sudo apt-get -qq -y install r-base-core qpdf texlive-latex-base texlive-base  xzdec texinfo ccache tex4ht texlive-fonts-extra
 sudo tlmgr init-usertree
