@@ -76,3 +76,4 @@ cd rstan
 echo "CXX = `R CMD config CXX`" >> R_Makevars # ccache is set in ~/.R/Makevars
 more R_Makevars
 bash ~/buildrstan/wait4.sh "make check"
+bash ~/buildrstan/wait4.sh "make install"
