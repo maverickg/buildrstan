@@ -1,4 +1,3 @@
-
 #!/bin/bash 
 ## post building, not important
 cd ~/buildrstan

@@ -5,6 +5,7 @@ export  R_LIBS="~/rlib"
 
 STAN_REPO_BRANCH=`git rev-parse --abbrev-ref HEAD`
 RSTAN_REPO_BRANCH=develop
+RSTAN_REPO_BRANCH=feature/return_wall_time
 
 grepstanbranch=`git ls-remote --heads https://github.com/stan-dev/stan.git | grep "/${STAN_REPO_BRANCH}"`
 if [ -z "$grepstanbranch" ]; then
