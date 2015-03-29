@@ -10,3 +10,5 @@ else
 fi 
 exit $!
 
+# cd ~/buildrstan/rstan/rstan/example
+# R -q -f test.R 

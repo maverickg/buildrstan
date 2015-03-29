@@ -4,10 +4,8 @@ mkdir -p ~/rlib
 export  R_LIBS="~/rlib"
 
 STAN_REPO_BRANCH=`git rev-parse --abbrev-ref HEAD`
-STAN_REPO_BRANCH=feature/partial-inits
+STAN_REPO_BRANCH=develop
 STAN_REPO_BRANCH=`git rev-parse --abbrev-ref HEAD`
-RSTAN_REPO_BRANCH=feature/return_wall_time
-RSTAN_REPO_BRANCH=feature/partial-inits
 RSTAN_REPO_BRANCH=develop
 
 grepstanbranch=`git ls-remote --heads https://github.com/stan-dev/stan.git | grep "/${STAN_REPO_BRANCH}"`
@@ -72,7 +70,6 @@ fi
 
 R CMD INSTALL ${stanheadtargz}
 
-
 R -q -e "options(repos=structure(c(CRAN = 'http://cran.rstudio.com'))); for (pkg in c('inline', 'Rcpp', 'RcppEigen', 'RUnit', 'BH', 'RInside', 'coda')) if (!require(pkg, character.only = TRUE))  install.packages(pkg, dep = TRUE); sessionInfo()"
 
 cd rstan
@@ -80,3 +77,4 @@ echo "CXX = `R CMD config CXX`" >> R_Makevars # ccache is set in ~/.R/Makevars
 more R_Makevars
 bash ~/buildrstan/wait4.sh "make install"
 bash ~/buildrstan/wait4.sh "make check"
+
