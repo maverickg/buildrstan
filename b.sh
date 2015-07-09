@@ -39,6 +39,8 @@ git config -f .gitmodules submodule.stan.branch ${STAN_REPO_BRANCH}
 git config -f .gitmodules submodule.StanHeaders/inst/include/mathlib.branch ${STAN_MATH_REPO_BRANCH}
 git submodule --quiet update --remote
 git submodule status
+ls -alh StanHeaders/inst/include/mathlib
+ls -alh StanHeaders/inst/include 
 
 mkdir -p "${SEMAPHORE_CACHE_DIR}/.ccahe"
 export CCACHE_DIR="${SEMAPHORE_CACHE_DIR}/.ccahe"
