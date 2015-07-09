@@ -19,8 +19,8 @@ if [ -z "$greprstanbranch" ]; then
     RSTAN_REPO_BRANCH=develop
 fi
 
-greprmathbranch=`git ls-remote --heads https://github.com/stan-dev/math.git | grep "/${STAN_MATH_REPO_BRANCH}"`
-if [ -z "$greprmathbranch" ]; then
+grepmathbranch=`git ls-remote --heads https://github.com/stan-dev/math.git | grep "/${STAN_MATH_REPO_BRANCH}"`
+if [ -z "$grepmathbranch" ]; then
     STAN_MATH_REPO_BRANCH=develop
 fi
 
