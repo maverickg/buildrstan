@@ -35,6 +35,7 @@ git submodule --quiet update --remote
 git submodule status
 
 cd rstan
+git submodule --quiet update --init --recursive
 git config -f .gitmodules submodule.stan.branch ${STAN_REPO_BRANCH}
 git config -f .gitmodules submodule.StanHeaders/inst/include/mathlib.branch ${STAN_MATH_REPO_BRANCH}
 git submodule --quiet update --remote
