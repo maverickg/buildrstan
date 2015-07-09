@@ -10,4 +10,3 @@ script for building rstan on semaphore
 1. `bash -x b.sh` for Thread #1
 4. `bash -x t.sh` for Thread #1
 3. `bash -x p.sh` for Post-thread
-
