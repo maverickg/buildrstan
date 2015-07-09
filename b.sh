@@ -7,6 +7,7 @@ STAN_REPO_BRANCH=`git rev-parse --abbrev-ref HEAD`
 STAN_REPO_BRANCH=develop
 STAN_REPO_BRANCH=`git rev-parse --abbrev-ref HEAD`
 RSTAN_REPO_BRANCH=develop
+STAN_MATH_REPO_BRANCH=develop
 
 grepstanbranch=`git ls-remote --heads https://github.com/stan-dev/stan.git | grep "/${STAN_REPO_BRANCH}"`
 if [ -z "$grepstanbranch" ]; then
@@ -16,6 +17,11 @@ fi
 greprstanbranch=`git ls-remote --heads https://github.com/stan-dev/rstan.git | grep "/${RSTAN_REPO_BRANCH}"`
 if [ -z "$greprstanbranch" ]; then
     RSTAN_REPO_BRANCH=develop
+fi
+
+greprmathbranch=`git ls-remote --heads https://github.com/stan-dev/math.git | grep "/${STAN_MATH_REPO_BRANCH}"`
+if [ -z "$greprmathbranch" ]; then
+    STAN_MATH_REPO_BRANCH=develop
 fi
 
 dd if=/dev/zero of=~/.swapfile bs=2048 count=1M
@@ -30,6 +36,7 @@ git submodule status
 
 cd rstan
 git config -f .gitmodules submodule.stan.branch ${STAN_REPO_BRANCH}
+git config -f .gitmodules submodule.StanHeaders/inst/include/mathlib.branch ${STAN_MATH_REPO_BRANCH}
 git submodule --quiet update --remote
 git submodule status
 
