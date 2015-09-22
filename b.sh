@@ -4,10 +4,10 @@ mkdir -p ~/rlib
 export  R_LIBS="~/rlib"
 
 STAN_REPO_BRANCH=`git rev-parse --abbrev-ref HEAD`
-STAN_REPO_BRANCH=develop
+STAN_REPO_BRANCH=master
 STAN_REPO_BRANCH=`git rev-parse --abbrev-ref HEAD`
 RSTAN_REPO_BRANCH=develop
-STAN_MATH_REPO_BRANCH=develop
+STAN_MATH_REPO_BRANCH=master
 
 grepstanbranch=`git ls-remote --heads https://github.com/stan-dev/stan.git | grep "/${STAN_REPO_BRANCH}"`
 if [ -z "$grepstanbranch" ]; then
