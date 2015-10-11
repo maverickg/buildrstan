@@ -5,7 +5,6 @@ export  R_LIBS="~/rlib"
 
 STAN_REPO_BRANCH=`git rev-parse --abbrev-ref HEAD`
 STAN_REPO_BRANCH=master
-STAN_REPO_BRANCH=`git rev-parse --abbrev-ref HEAD`
 RSTAN_REPO_BRANCH=develop
 STAN_MATH_REPO_BRANCH=master
 
@@ -80,7 +79,7 @@ fi
 
 R CMD INSTALL ${stanheadtargz}
 
-R -q -e "options(repos=structure(c(CRAN = 'http://cran.rstudio.com'))); for (pkg in c('inline', 'Rcpp', 'RcppEigen', 'ggplot2',  'gridExtra', 'RUnit', 'BH', 'RInside', 'coda')) if (!require(pkg, character.only = TRUE))  install.packages(pkg, dep = TRUE); sessionInfo()"
+R -q -e "options(repos=structure(c(CRAN = 'http://cran.rstudio.com'))); for (pkg in c('inline', 'StanHeaders', 'foo', 'Rcpp', 'RcppEigen', 'ggplot2',  'gridExtra', 'RUnit', 'BH', 'RInside', 'coda')) if (!require(pkg, character.only = TRUE))  install.packages(pkg, dep = TRUE); sessionInfo()"
 
 cd rstan
 echo "CXX = `R CMD config CXX`" >> R_Makevars # ccache is set in ~/.R/Makevars
